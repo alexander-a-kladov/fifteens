@@ -29,8 +29,8 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 if(ANDROID)
 else()
   add_executable(fifteens
-    fifthteens.cpp
-    fifthteens.h
+    fifteens.cpp
+    fifteens.h
     main.cpp
   )
 endif()

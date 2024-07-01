@@ -6,18 +6,18 @@
 #include <time.h>
 #include <iostream>
 
-#ifndef __FIFTHTEENS_H__
-#define __FIFTHTEENS_H__
+#ifndef __FIFTEENS_H__
+#define __FIFTEENS_H__
 
 using namespace std;
 
 const int IMG_SIZE=768;
 
-class FifthTeens : public QWidget
+class Fifteens : public QWidget
 {
     Q_OBJECT
     public:
-	FifthTeens(QWidget *parent=0, int num=2) : QWidget(parent) {
+	Fifteens(QWidget *parent=0, int num=2) : QWidget(parent) {
 	    setWindowTitle("Fifteens (DHR)");
 	    srand(time(NULL));
 	    MAX_NUM = num;
@@ -32,17 +32,19 @@ class FifthTeens : public QWidget
 
 	void new_game() {
 		misplace = -1;
+		not_show = true;
 		loadImg();
 	    for (int i=0;i<MAX_NUM;i++)
 	    for (int j=0;j<MAX_NUM;j++)
 			mas[i*MAX_NUM+j]=i*MAX_NUM+j+1;
 	    	hr = hc = MAX_NUM-1;
 	    shuffle();
+	    not_show = false;
+	    repaint();
 	    checkEnd();
 	}
 	
 	void loadImg() {
-        //const char *img_path="/usr/share/wallpapers/1024x768/";
         QString img_path=QDir::currentPath();
         QDir dir(img_path.toLocal8Bit().constData(), "*.jpeg");
         img = QImage(img_path+"/"+
@@ -53,7 +55,7 @@ class FifthTeens : public QWidget
 	
 	void shuffle()
 	{
-	    for (int i=0;i<100;i++) {
+	    for (int i=0;i<MAX_NUM*MAX_NUM*100;i++) {
 		if (rand()%2) moveLine(hr,rand()%MAX_NUM);
 		moveLine(rand()%MAX_NUM,hc);
 	    }
@@ -77,7 +79,9 @@ class FifthTeens : public QWidget
 		}
 		    mas[j*MAX_NUM+c]=max_value;
 		    hr = j;
-		    repaint();
+		    if (!not_show) {
+		    	repaint();
+			}
 		    return;
 	    }
 	    if (hr==r) {
@@ -90,7 +94,9 @@ class FifthTeens : public QWidget
 		}
 		    mas[r*MAX_NUM+j]=max_value;
 		    hc = j;
-		    repaint();
+		    if (!not_show) {
+		    	repaint();
+			}
 		    return;
 	    }
 	    return;
@@ -133,6 +139,7 @@ class FifthTeens : public QWidget
 	int max_value;
 	bool digits_show;
 	bool hint_show;
+	bool not_show;
 	void paintEvent(QPaintEvent *ev);
 	void mousePressEvent(QMouseEvent *ev);
 	void keyPressEvent(QKeyEvent *ev);

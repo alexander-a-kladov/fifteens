@@ -1,8 +1,8 @@
-#include "fifthteens.h"
+#include "fifteens.h"
 #include <QPainter>
 #include <QMessageBox>
 
-void FifthTeens::paintEvent(QPaintEvent *ev)
+void Fifteens::paintEvent(QPaintEvent *ev)
 {
     QPainter p(this);
     static int flash=0;
@@ -57,7 +57,7 @@ void FifthTeens::paintEvent(QPaintEvent *ev)
     return;
 }
 
-void FifthTeens::mousePressEvent(QMouseEvent *ev)
+void Fifteens::mousePressEvent(QMouseEvent *ev)
 {
 	if (checkEnd()) {new_game();return;}
     moveLine(ev->y()/BRICK_SIZE,ev->x()/BRICK_SIZE);
@@ -65,7 +65,7 @@ void FifthTeens::mousePressEvent(QMouseEvent *ev)
     return;
 }
 
-void FifthTeens::keyPressEvent(QKeyEvent *ev)
+void Fifteens::keyPressEvent(QKeyEvent *ev)
 {
 	int num;
 	if (checkEnd()) {
