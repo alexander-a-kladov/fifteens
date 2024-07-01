@@ -110,24 +110,31 @@ class Fifteens : public QWidget
 	    for (j=0;j<max_value;j++)
 		if (mas[j]!=j+1) break;
 	    if (j==max_value) return true;
-	    checkState();
+	    findHint();
 	    return false;
 	}
 
-	bool checkState() {
+	void findHint() {
 		int offset = 0;
 		for (int offset=0;offset<MAX_NUM-2;++offset) {
 		for (int j=offset;j<MAX_NUM;++j) {
 			int index = offset*MAX_NUM + j;
-			if (mas[index]!=index+1) {misplace = index + 1;return false;}
+			if (mas[index]!=index+1) {misplace = index + 1;return;}
 		}
-		if (offset==MAX_NUM-3) {misplace = -1; return false;}
+		if (offset==MAX_NUM-3) {break;}
 		for (int i=offset+1;i<MAX_NUM;++i) {
 			int index = i*MAX_NUM + offset;
-			if (mas[index]!=index+1) {misplace = index + 1;return false;}
+			if (mas[index]!=index+1) {misplace = index + 1;return;}
 		}
 		}
-		return true;
+		for (int i=MAX_NUM-2;i<MAX_NUM;++i) {
+		for (int j=MAX_NUM-3;j<MAX_NUM;++j) {
+			int index=i*MAX_NUM + j;
+			if (mas[index]!=index+1) {misplace = index + 1;return;}
+		}
+		}
+		misplace = -1;
+		return;
 	}
     protected:
 	int MAX_NUM;
