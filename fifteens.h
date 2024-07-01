@@ -22,7 +22,7 @@ class Fifteens : public QWidget
 	    srand(time(NULL));
 	    MAX_NUM = num;
 	    max_value = MAX_NUM*MAX_NUM;
-	    BRICK_SIZE = IMG_SIZE/MAX_NUM;
+	    BRICK_SIZE = double(IMG_SIZE)/MAX_NUM;
 	    setFixedSize(IMG_SIZE,IMG_SIZE);
 	    mas = new int [max_value];
         digits_show = false;
@@ -131,7 +131,7 @@ class Fifteens : public QWidget
 	}
     protected:
 	int MAX_NUM;
-	int BRICK_SIZE;
+	double BRICK_SIZE;
 	QImage img;
 	QTimer *tmr;
 	int hr,hc;

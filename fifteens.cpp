@@ -1,6 +1,7 @@
 #include "fifteens.h"
 #include <QPainter>
 #include <QMessageBox>
+#include <math.h>
 
 void Fifteens::paintEvent(QPaintEvent *ev)
 {
@@ -13,10 +14,10 @@ void Fifteens::paintEvent(QPaintEvent *ev)
     for (int i=0;i<MAX_NUM;i++)
     for (int j=0;j<MAX_NUM;j++) {
 	if (mas[i*MAX_NUM+j]!=max_value) {
-		p.drawImage(j*BRICK_SIZE,i*BRICK_SIZE,img,
+		p.drawImage(QPointF(j*BRICK_SIZE,i*BRICK_SIZE),img.copy(
 		    BRICK_SIZE*((mas[i*MAX_NUM+j]-1)%MAX_NUM),
 		    BRICK_SIZE*((mas[i*MAX_NUM+j]-1)/MAX_NUM),
-		    BRICK_SIZE,BRICK_SIZE);
+		    ceil(BRICK_SIZE),ceil(BRICK_SIZE)));
 		if (digits_show) {
 			p.drawText(j*BRICK_SIZE,i*BRICK_SIZE,
 			    BRICK_SIZE,BRICK_SIZE,Qt::AlignCenter,
