@@ -25,8 +25,8 @@ class Fifteens : public QWidget
 	    BRICK_SIZE = double(IMG_SIZE)/MAX_NUM;
 	    setFixedSize(IMG_SIZE,IMG_SIZE);
 	    mas = new int [max_value];
-        digits_show = false;
-        hint_show = false;
+            digits_show = false;
+            hint_show = false;
 	    new_game();
 	}
 
